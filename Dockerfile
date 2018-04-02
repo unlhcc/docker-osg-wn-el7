@@ -40,3 +40,6 @@ RUN groupadd -r condor && \
 # yum update
 RUN yum update -y && \
     yum clean all
+
+# Disable overlay
+RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
