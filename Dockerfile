@@ -37,6 +37,10 @@ RUN yum -y install cvmfs \
 RUN groupadd -r condor && \
     useradd -r -g condor -d /var/lib/condor -s /sbin/nologin condor
 
+# Update to singularity from osg-testing (testing for SOFTWARE-3162)
+RUN yum -y install --enablerepo osg-testing singularity && \
+    yum clean all
+
 # yum update
 RUN yum update -y && \
     yum clean all
