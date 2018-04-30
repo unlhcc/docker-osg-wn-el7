@@ -14,8 +14,8 @@ FROM opensciencegrid/osg-wn:3.4-el7
 #
 # CMSSW dependencies
 # ------------------
-# Required software is listed under slc6_amd64_platformSeeds at
-# http://cmsrep.cern.ch/cgi-bin/cmspkg/driver/cms/slc6_amd64_gcc472
+# Required software is listed under slc7_amd64_platformSeeds at
+# http://cmsrep.cern.ch/cgi-bin/cmspkg/driver/cms/slc7_amd64_gcc700
 
 RUN yum -y install cvmfs \
                    gcc \
@@ -25,25 +25,29 @@ RUN yum -y install cvmfs \
                    redhat-lsb-core \
                    sssd-client && \
     yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl \
-                   ncurses e2fsprogs krb5-libs freetype compat-readline5 \
-                   ncurses-libs perl-libs perl-ExtUtils-Embed fontconfig \
-                   compat-libstdc++-33 libidn libX11 libXmu libSM libICE \
-                   libXcursor libXext libXrandr libXft mesa-libGLU mesa-libGL \
-                   e2fsprogs-libs libXi libXinerama libXft libXrender libXpm \
-                   libcom_err && \
+                   ncurses e2fsprogs krb5-libs freetype ncurses-libs perl-libs \
+                   perl-ExtUtils-Embed fontconfig compat-libstdc++-33 libidn \
+                   libX11 libXmu libSM libICE libXcursor libXext libXrandr \
+                   libXft mesa-libGLU mesa-libGL e2fsprogs-libs libXi \
+                   libXinerama libXft-devel libXrender libXpm libcom_err \
+                   perl-Test-Harness perl-Carp perl-constant perl-PathTools \
+                   perl-Data-Dumper perl-Digest-MD5 perl-Exporter \
+                   perl-File-Path perl-File-Temp perl-Getopt-Long perl-Socket \
+                   perl-Text-ParseWords perl-Time-Local libX11-devel \
+                   libXpm-devel libXext-devel mesa-libGLU-devel perl-Switch \
+                   perl-Storable perl-Env perl-Thread-Queue perl-Encode nspr \
+                   nss nss-util file file-libs readline zlib popt bzip2 \
+                   bzip2-libs && \
     yum clean all
 
 # Create condor user and group
 RUN groupadd -r condor && \
     useradd -r -g condor -d /var/lib/condor -s /sbin/nologin condor
 
-# Update to singularity from osg-testing (testing for SOFTWARE-3162)
-RUN yum -y install --enablerepo osg-testing singularity && \
+# Update to singularity from osg-development
+RUN yum -y install --enablerepo osg-development singularity && \
     yum clean all
 
 # yum update
 RUN yum update -y && \
     yum clean all
-
-# Disable overlay
-RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
