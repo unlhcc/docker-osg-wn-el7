@@ -48,6 +48,12 @@ RUN groupadd -r condor && \
 RUN yum -y install --enablerepo osg-development singularity && \
     yum clean all
 
+# Disable overlay
+RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
+
+# Enable underlay
+RUN perl -pi -e 's/^enable underlay =.*/enable underlay = yes/g' /etc/singularity/singularity.conf
+
 # yum update
 RUN yum update -y && \
     yum clean all
