@@ -44,8 +44,9 @@ RUN yum -y install cvmfs \
 RUN groupadd -r condor && \
     useradd -r -g condor -d /var/lib/condor -s /sbin/nologin condor
 
-# Update to singularity from osg-development
-RUN yum -y install --enablerepo osg-development singularity && \
+# Sync singularity version
+#RUN yum -y distro-sync singularity && \
+RUN yum -y distro-sync --enablerepo=osg-upcoming-testing singularity && \
     yum clean all
 
 # Disable overlay
