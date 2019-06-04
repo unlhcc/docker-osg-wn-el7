@@ -46,7 +46,7 @@ RUN groupadd -r condor && \
 
 # Sync singularity version
 #RUN yum -y distro-sync singularity && \
-RUN yum -y distro-sync --enablerepo=osg-upcoming-development singularity && \
+RUN yum -y distro-sync --enablerepo=osg-testing singularity && \
     yum clean all
 
 # Disable overlay
