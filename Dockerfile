@@ -45,8 +45,8 @@ RUN groupadd -r condor && \
     useradd -r -g condor -d /var/lib/condor -s /sbin/nologin condor
 
 # Sync singularity version
-#RUN yum -y distro-sync singularity && \
-RUN yum -y distro-sync --enablerepo=osg-testing singularity && \
+#RUN yum -y distro-sync --enablerepo=osg-testing singularity && \
+RUN yum -y distro-sync singularity && \
     yum clean all
 
 # Disable overlay
