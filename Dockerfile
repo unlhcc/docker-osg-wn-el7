@@ -46,7 +46,8 @@ RUN groupadd -r condor && \
 
 # Sync singularity version
 #RUN yum -y distro-sync --enablerepo=osg-testing singularity && \
-RUN yum -y distro-sync singularity && \
+#RUN yum -y distro-sync singularity && \
+RUN yum -y install https://kojipkgs.fedoraproject.org//work/tasks/411/37300411/singularity-3.4.0-rc.1.el7.x86_64.rpm && \
     yum clean all
 
 # Disable overlay
