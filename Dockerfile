@@ -1,4 +1,4 @@
-FROM opensciencegrid/osg-wn:3.4-el7
+FROM opensciencegrid/osg-wn:3.5-el7
 
 # Required
 # --------
@@ -45,15 +45,11 @@ RUN groupadd -r condor && \
     useradd -r -g condor -d /var/lib/condor -s /sbin/nologin condor
 
 # Sync singularity version
-#RUN yum -y distro-sync singularity && \
-RUN yum -y distro-sync --enablerepo=osg-development singularity && \
-    yum clean all
+#RUN yum -y distro-sync --enablerepo=epel-testing singularity && \
+#    yum clean all
 
 # Disable overlay
 RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
-
-# Enable underlay
-RUN perl -pi -e 's/^enable underlay =.*/enable underlay = yes/g' /etc/singularity/singularity.conf
 
 # yum update
 RUN yum update -y && \
