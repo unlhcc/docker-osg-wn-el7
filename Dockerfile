@@ -47,7 +47,7 @@ RUN groupadd -r condor && \
 # Sync singularity version
 #RUN yum -y distro-sync --enablerepo=epel-testing singularity && \
 #    yum clean all
-RUN yum -y update http://koji.chtc.wisc.edu/kojifiles/packages/singularity/3.5.2/1.1.osg34.el7/x86_64/singularity-3.5.2-1.1.osg34.el7.x86_64.rpm
+RUN yum -y update http://koji.chtc.wisc.edu/kojifiles/packages/singularity/3.5.3/1.1.osg34.el7/x86_64/singularity-3.5.3-1.1.osg34.el7.x86_64.rpm
 
 # Disable overlay
 RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
