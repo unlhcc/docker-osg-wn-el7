@@ -38,8 +38,7 @@ RUN yum -y install cvmfs \
                    perl-Storable perl-Env perl-Thread-Queue perl-Encode nspr \
                    nss nss-util file file-libs readline zlib popt bzip2 \
                    bzip2-libs && \
-    yum clean all && \
-    rm -rf /var/cache/yum
+    yum clean all
 
 # Create condor user and group
 RUN groupadd -r condor && \
@@ -47,14 +46,12 @@ RUN groupadd -r condor && \
 
 # Sync singularity version
 #RUN yum -y distro-sync --enablerepo=epel-testing singularity && \
-RUN yum -y update https://kojipkgs.fedoraproject.org//work/tasks/5117/43885117/singularity-3.6.0%7Erc.1-1.1.el7.x86_64.rpm && \
-    yum clean all && \
-    rm -rf /var/cache/yum
+#    yum clean all
+RUN yum -y update http://koji.chtc.wisc.edu/kojifiles/packages/singularity/3.5.3/1.1.osg34.el7/x86_64/singularity-3.5.3-1.1.osg34.el7.x86_64.rpm
 
 # Disable overlay
 RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
 
 # yum update
 RUN yum update -y && \
-    yum clean all && \
-    rm -rf /var/cache/yum
+    yum clean all
