@@ -47,7 +47,7 @@ RUN groupadd -r condor && \
 
 # Sync singularity version
 #RUN yum -y distro-sync --enablerepo=epel-testing singularity && \
-RUN yum -y update https://kojipkgs.fedoraproject.org//work/tasks/8843/44548843/singularity-3.6.0%7Erc.3-1.1.el7.x86_64.rpm && \
+RUN yum -y update https://kojipkgs.fedoraproject.org//work/tasks/1419/45331419/singularity-3.6.0~rc.4-1.el7.x86_64.rpm && \
     yum clean all && \
     rm -rf /var/cache/yum
 
