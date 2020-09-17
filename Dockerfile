@@ -1,4 +1,4 @@
-FROM opensciencegrid/osg-wn:3.5-el7
+FROM opensciencegrid/osg-wn:3.4-el7
 
 # Required
 # --------
@@ -46,7 +46,7 @@ RUN groupadd -r condor && \
     useradd -r -g condor -d /var/lib/condor -s /sbin/nologin condor
 
 # Sync singularity version
-RUN yum -y distro-sync --enablerepo=epel-testing singularity && \
+RUN yum -y distro-sync --enablerepo=osg-testing singularity && \
     yum clean all && \
     rm -rf /var/cache/yum
 
