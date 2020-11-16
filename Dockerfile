@@ -51,6 +51,9 @@ RUN yum -y upgrade https://kojipkgs.fedoraproject.org//work/tasks/93/55410093/si
     yum clean all && \
     rm -rf /var/cache/yum
 
+# Force pilots to use container singularity
+ENV OSG_SINGULARITY_BINARY /usr/bin/singularity
+
 # Disable overlay and privileged mode
 RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
 #    perl -pi -e 's/^allow setuid =.*/allow setuid = no/g'     /etc/singularity/singularity.conf
