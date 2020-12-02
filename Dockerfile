@@ -46,17 +46,13 @@ RUN groupadd -r condor && \
     useradd -r -g condor -d /var/lib/condor -s /sbin/nologin condor
 
 # Sync singularity version
-#RUN yum -y distro-sync --enablerepo=epel-testing singularity && \
-RUN yum -y upgrade https://kojipkgs.fedoraproject.org//work/tasks/93/55410093/singularity-3.7.0~rc.1-1.el7.x86_64.rpm && \
+RUN yum -y distro-sync --enablerepo=epel-testing singularity && \
     yum clean all && \
     rm -rf /var/cache/yum
 
-# Force pilots to use container singularity
-ENV OSG_SINGULARITY_BINARY /usr/bin/singularity
-
 # Disable overlay and privileged mode
-RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
-#    perl -pi -e 's/^allow setuid =.*/allow setuid = no/g'     /etc/singularity/singularity.conf
+RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf && \
+    perl -pi -e 's/^allow setuid =.*/allow setuid = no/g'     /etc/singularity/singularity.conf
 
 # yum update
 RUN yum update -y && \
