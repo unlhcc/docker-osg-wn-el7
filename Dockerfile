@@ -51,8 +51,8 @@ RUN yum -y distro-sync --enablerepo=epel-testing singularity && \
     rm -rf /var/cache/yum
 
 # Disable overlay and privileged mode
-RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf
-#   perl -pi -e 's/^allow setuid =.*/allow setuid = no/g'     /etc/singularity/singularity.conf
+RUN perl -pi -e 's/^enable overlay =.*/enable overlay = no/g' /etc/singularity/singularity.conf && \
+    perl -pi -e 's/^allow setuid =.*/allow setuid = no/g'     /etc/singularity/singularity.conf
 
 # yum update
 RUN yum update -y && \
