@@ -1,4 +1,4 @@
-FROM opensciencegrid/osg-wn:3.5-el7
+FROM opensciencegrid/osg-wn:3.6-el7
 
 # Required
 # --------
@@ -9,19 +9,20 @@ FROM opensciencegrid/osg-wn:3.5-el7
 # -----
 # - ETF calls /usr/bin/lsb_release (from redhat-lsb-core)
 # - sssd-client for LDAP lookups through the host
-# - SAM tests expect cvmfs utilities
+# - SAM tests expect cvmfs utilities and python3
 # - gcc is required by GLOW jobs (builds matplotlib)
 #
 # CMSSW dependencies
 # ------------------
 # Required software is listed under slc7_amd64_platformSeeds at
-# http://cmsrep.cern.ch/cgi-bin/cmspkg/driver/cms/slc7_amd64_gcc700
+# http://cmsrep.cern.ch/cgi-bin/cmspkg/driver/cms/slc7_amd64_gcc820
 
 RUN yum -y install cvmfs \
                    gcc \
                    glibc-headers \
                    openssh-clients \
                    osg-wn-client \
+                   python3 \
                    redhat-lsb-core \
                    sssd-client && \
     yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl \
